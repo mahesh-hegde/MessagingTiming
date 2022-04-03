@@ -64,7 +64,6 @@ Future<double> _calcBasicMessageChannelBinary() async {
       () => messagingTiming.basicMessageChannelBinaryPlatformVersion);
 }
 
-
 Future<double> _calcPigeon() async {
   final MessagingTiming messagingTiming = MessagingTiming();
   final Api api = Api();
@@ -154,8 +153,14 @@ class _MyAppState extends State<MyApp> {
       ['simple method channel (2nd run)', _calcSimpleMethodChannel],
       ['basic message channel (1st run)', _calcBasicMessageChannel],
       ['basic message channel (2nd run)', _calcBasicMessageChannel],
-      ['basic message channel binary (1st run)', _calcBasicMessageChannelBinary],
-      ['basic message channel binary (2nd run)', _calcBasicMessageChannelBinary],
+      [
+        'basic message channel binary (1st run)',
+        _calcBasicMessageChannelBinary
+      ],
+      [
+        'basic message channel binary (2nd run)',
+        _calcBasicMessageChannelBinary
+      ],
       ['pigeon (1st run)', _calcPigeon],
       ['pigeon (2nd run)', _calcPigeon],
       ['ffi', _calcFfi],
@@ -165,15 +170,16 @@ class _MyAppState extends State<MyApp> {
     ], (int index, List entry) => _makeTest('$index', entry[0], entry[1]))
         .toList();
   }
+
   bool _testsRunning = false;
 
   Future<void> _runTests() async {
-	setState(() {
-		_testsRunning = true; 
-		for (var test in _tests) {
-			 _results[test.name] = null;
-		}
-	});
+    setState(() {
+      _testsRunning = true;
+      for (var test in _tests) {
+        _results[test.name] = null;
+      }
+    });
     for (_Test test in _tests) {
       double value = await test.run();
       if (!mounted) return;
@@ -181,7 +187,7 @@ class _MyAppState extends State<MyApp> {
         _results[test.name] = value;
       });
     }
-	setState(() => _testsRunning = false);
+    setState(() => _testsRunning = false);
   }
 
   @override
@@ -193,27 +199,28 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(children: [
           Center(
-            child: ListView(shrinkWrap: true,
+            child: ListView(
+                shrinkWrap: true,
                 children: _imap(_tests, (int index, _Test test) {
-              return Container(
-                padding: EdgeInsets.all(5.0),
-                height: 50,
-                color: Colors.amber[index % 9 * 100],
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [Text(test.message)],
-                ),
-              );
-            }).toList()),
+                  return Container(
+                    padding: EdgeInsets.all(5.0),
+                    height: 50,
+                    color: Colors.amber[index % 9 * 100],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [Text(test.message)],
+                    ),
+                  );
+                }).toList()),
           ),
           Padding(
               padding: EdgeInsets.all(16.0),
-              child:
-                  ElevatedButton(child: Text("Re-Run"), onPressed: _testsRunning ? null : _runTests))
+              child: ElevatedButton(
+                  child: Text("Re-Run"),
+                  onPressed: _testsRunning ? null : _runTests))
         ]),
       ),
     );
   }
-
 }
