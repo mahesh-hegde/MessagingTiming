@@ -17,7 +17,11 @@ import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
 import io.flutter.plugin.common.StandardMessageCodec;
 
+import androidx.annotation.Keep;
+
 /** MessagingTimingPlugin */
+
+@Keep
 public class MessagingTimingPlugin implements FlutterPlugin, MethodCallHandler {
   private static final String TAG = "MessagingTimingPlugin";
   /// The MethodChannel that will the communication between Flutter and native

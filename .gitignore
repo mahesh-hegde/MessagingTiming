@@ -41,3 +41,9 @@ build/
 .project
 .classpath
 .settings
+
+## NDK generated
+android/.cxx
+
+## Vim swap files
+**/.*.swp
