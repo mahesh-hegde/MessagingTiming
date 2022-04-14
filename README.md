@@ -12,11 +12,13 @@ flutter run --release
 
 ## Misc. Notes:
 
-It seems
+It seems, in original code
 
 * FFI -> Android JNI with call happening on Main thread
 
 * FFI UI Thread -> Android JNI with call happening on calling thread itself.
 
 see `android/src/main/java/com/example/MessagingTiming/MessagingTimingPlugin.java` and `android/ffi/ffi.c`.
+
+It can be confusing because in Android, `Activity#runOnUiThread` actually does the former. I have changed the widgets text to be more clear.
 

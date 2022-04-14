@@ -153,6 +153,8 @@ class _MyAppState extends State<MyApp> {
       ['simple method channel (2nd run)', _calcSimpleMethodChannel],
       ['basic message channel (1st run)', _calcBasicMessageChannel],
       ['basic message channel (2nd run)', _calcBasicMessageChannel],
+	  /* Does not work */
+	  /*
       [
         'basic message channel binary (1st run)',
         _calcBasicMessageChannelBinary
@@ -161,11 +163,12 @@ class _MyAppState extends State<MyApp> {
         'basic message channel binary (2nd run)',
         _calcBasicMessageChannelBinary
       ],
+	  */
       ['pigeon (1st run)', _calcPigeon],
       ['pigeon (2nd run)', _calcPigeon],
-      ['ffi', _calcFfi],
+      ['ffi run on main thread', _calcFfi],
       ['ffi non-blocking', _calcFfiNonBlocking],
-      ['ffi ui thread', _calcFfiUi],
+      ['ffi same thread as dart', _calcFfiUi],
       ['just Dart', _calcDart],
     ], (int index, List entry) => _makeTest('$index', entry[0], entry[1]))
         .toList();
